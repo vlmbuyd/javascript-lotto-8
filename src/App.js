@@ -17,7 +17,7 @@ class App {
     issuedLottos.forEach((lotto) => {
       const numbers = lotto.getNumbers();
       numbers.sort((a, b) => a - b);
-      Console.print(numbers);
+      Console.print(`[${numbers.join(', ')}]`);
     });
 
     const winningNumber = await Input.readInputValues(

@@ -6,7 +6,7 @@ export const IO_MESSAGE = Object.freeze({
   PURCHASE_COUNT_OUTPUT: (count) => `\n${count}개를 구매했습니다.`,
   WINNING_STATISTICS_OUTPUT: '\n당첨 통계\n---\n',
   TOTAL_PROFIT_OUTPUT: (profitRate) =>
-    `총 수익률은 ${profitRate.toFixed(2)}%입니다.`,
+    `총 수익률은 ${profitRate.toFixed(1)}%입니다.`,
 });
 
 export const ERROR_MESSAGE = Object.freeze({
