@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import InputValidator from '../utils/Validator.js';
+import InputValidator from '../utils/InputValidator.js';
 
 class Input {
   /**
