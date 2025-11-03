@@ -23,6 +23,7 @@ describe('입력값 검증 테스트 (로또 구입 금액)', () => {
 
 describe('입력값 검증 테스트 (당첨 번호)', () => {
   it.each([
+    ['공백이 입력된 경우', '  ', ERROR_MESSAGE.BLANK_INPUT],
     [
       '구분자가 쉼표(,)가 아닌 경우',
       '1,2;3,4,5,6',
@@ -57,5 +58,20 @@ describe('입력값 검증 테스트 (당첨 번호)', () => {
     expect(() =>
       InputValidator.runValidate(TERMS.WINNING_NUMBER, input)
     ).toThrow(expectedError);
+  });
+});
+
+describe('입력값 검증 테스트 (로또 구입 금액)', () => {
+  it.each([
+    ['공백이 입력된 경우', '  ', ERROR_MESSAGE.BLANK_INPUT],
+    [
+      '숫자가 아닌 문자가 포함된 경우',
+      'lotto',
+      ERROR_MESSAGE.BONUS_NUMBER_TYPE,
+    ],
+  ])('%s', (_, input, expectedError) => {
+    expect(() => InputValidator.runValidate(TERMS.BONUS_NUMBER, input)).toThrow(
+      expectedError
+    );
   });
 });

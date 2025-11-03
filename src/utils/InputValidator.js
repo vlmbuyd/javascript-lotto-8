@@ -2,7 +2,30 @@ import { ERROR_MESSAGE, LOTTO_RULES, SEPERATOR, TERMS } from './constants.js';
 import Parser from './Parser.js';
 
 /**
- * 당첨 번호 검증
+ * 구입 금액
+ */
+class PurchaseAmountValidator {
+  static #validators = [this.#validateIsNaN, this.#validateIsValidUnit];
+
+  static #validateIsNaN(value) {
+    if (Number.isNaN(Number(value))) {
+      throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT_TYPE);
+    }
+  }
+
+  static #validateIsValidUnit(value) {
+    if (value % LOTTO_RULES.TICKET_PRICE !== 0) {
+      throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT_UNIT);
+    }
+  }
+
+  static validate(value) {
+    this.#validators.forEach((validator) => validator.call(this, value));
+  }
+}
+
+/**
+ * 당첨 번호
  */
 class WinningNumberValidator {
   static #validators = [
@@ -50,35 +73,28 @@ class WinningNumberValidator {
 }
 
 /**
- * 구입 금액 검증
+ * 보너스 번호
  */
-class PurchaseAmountValidator {
-  static #validators = [this.#validateIsNaN, this.#validateIsValidUnit];
-
+class BonusNumberValidator {
   static #validateIsNaN(value) {
     if (Number.isNaN(Number(value))) {
-      throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT_TYPE);
-    }
-  }
-
-  static #validateIsValidUnit(value) {
-    if (value % LOTTO_RULES.TICKET_PRICE !== 0) {
-      throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT_UNIT);
+      throw new Error(ERROR_MESSAGE.BONUS_NUMBER_TYPE);
     }
   }
 
   static validate(value) {
-    this.#validators.forEach((validator) => validator.call(this, value));
+    this.#validateIsNaN(value);
   }
 }
 
 /**
- * 입력값 검증기
+ * 입력값 검증
  */
 class InputValidator {
   static #validators = {
     [TERMS.PURCHASE_AMOUNT]: (value) => PurchaseAmountValidator.validate(value),
     [TERMS.WINNING_NUMBER]: (value) => WinningNumberValidator.validate(value),
+    [TERMS.BONUS_NUMBER]: (value) => BonusNumberValidator.validate(value),
   };
 
   // 공통 검증 로직
