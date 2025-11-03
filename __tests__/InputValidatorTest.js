@@ -61,7 +61,7 @@ describe('입력값 검증 테스트 (당첨 번호)', () => {
   });
 });
 
-describe('입력값 검증 테스트 (로또 구입 금액)', () => {
+describe('입력값 검증 테스트 (보너스 번호)', () => {
   it.each([
     ['공백이 입력된 경우', '  ', ERROR_MESSAGE.BLANK_INPUT],
     [
