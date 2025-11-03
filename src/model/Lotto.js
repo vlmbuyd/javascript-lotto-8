@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../utils/constants.js';
+import { ERROR_MESSAGE, LOTTO_RULES } from '../utils/constants.js';
 
 class Lotto {
   #numbers;
@@ -9,17 +9,27 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== 6) {
+    if (numbers.length !== LOTTO_RULES.TICKET_NUMBER_COUNT) {
       throw new Error(ERROR_MESSAGE.GENERATED_LOTTO_COUNT);
     }
 
-    if (new Set(numbers).size !== 6) {
+    if (new Set(numbers).size !== numbers.length) {
       throw new Error(ERROR_MESSAGE.GENERATED_LOTTO_DUPLICATE);
     }
   }
 
-  // TODO: 당첨 번호를 받아 몇개와 일치하는지
-  // TODO: 보너스 번호와 일치하는지
+  getNumbers() {
+    return [...this.#numbers];
+  }
+
+  calculateMatchCount(winningNumber) {
+    return this.#numbers.filter((number) => winningNumber.includes(number))
+      .length;
+  }
+
+  hasBonusNumber(bonusNumber) {
+    return this.#numbers.includes(Number(bonusNumber));
+  }
 }
 
 export default Lotto;

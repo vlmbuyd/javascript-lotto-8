@@ -26,13 +26,13 @@ class LottoMachine {
    * 로또 티켓 발행
    */
   static #issueLottoTickets(purchaseCount) {
-    const issuedLottos = new Map();
+    const issuedLottos = [];
 
     Array.from({ length: purchaseCount }).forEach(() => {
       const lottoNumbers = this.#generateLottoNumbers();
       const lotto = new Lotto(lottoNumbers);
 
-      issuedLottos.set(lottoNumbers, lotto);
+      issuedLottos.push(lotto);
     });
 
     return issuedLottos;
