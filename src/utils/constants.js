@@ -3,8 +3,8 @@ export const IO_MESSAGE = Object.freeze({
   WINNING_NUMBER_INPUT: '\n당첨 번호를 입력해 주세요.\n',
   BONUS_NUMBER_INPUT: '\n보너스 번호를 입력해 주세요.\n',
 
-  PURCHASE_COUNT_OUTPUT: (count) => `\n${count}개를 구입했습니다.`,
-  WINNING_STATISTICS_OUTPUT: '당첨 통계\n---\n',
+  PURCHASE_COUNT_OUTPUT: (count) => `\n${count}개를 구매했습니다.`,
+  WINNING_STATISTICS_OUTPUT: '\n당첨 통계\n---\n',
   TOTAL_PROFIT_OUTPUT: (profitRate) =>
     `총 수익률은 ${profitRate.toFixed(2)}%입니다.`,
 });
@@ -31,6 +31,7 @@ export const LOTTO_RULES = Object.freeze({
   MIN_NUMBER: 1,
   MAX_NUMBER: 45,
   TICKET_NUMBER_COUNT: 6,
+  TOTAL_RANK_COUNT: 5,
 });
 
 export const SEPERATOR = Object.freeze({
