@@ -53,6 +53,8 @@ class WinningNumberValidator {
  * 구입 금액 검증
  */
 class PurchaseAmountValidator {
+  static #validators = [this.#validateIsNaN, this.#validateIsValidUnit];
+
   static #validateIsNaN(value) {
     if (Number.isNaN(Number(value))) {
       throw new Error(ERROR_MESSAGE.PURCHASE_AMOUNT_TYPE);
@@ -66,8 +68,7 @@ class PurchaseAmountValidator {
   }
 
   static validate(value) {
-    this.#validateIsNaN(value);
-    this.#validateIsValidUnit(value);
+    this.#validators.forEach((validator) => validator.call(this, value));
   }
 }
 
